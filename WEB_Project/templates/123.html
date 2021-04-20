@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Title</title>
+</head>
+<body>
+<!-- Forms HTML -->
+<div id="form-A">
+    ... html form here ....
+</div>
+<div id="form-B">
+    ... another html form here ....
+</div>
+
+<!-- Hide forms initially with Javascript (visible for non Javascript users) -->
+<script type="text/javascript">
+    $("#form-A, #form-B").hide();
+</script>
+
+<!-- A dropdown to select a value -->
+<select id="choose-form">
+    <option>Please choose...</option>
+    <option value="form-A">Some form</option>
+    <option value="form-B">Another form</option>
+</select>
+
+<!-- and some simple jQuery -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#choose-form").change(function() {
+
+            //Hide -other- visible forms
+            $("#form-A, #form-B").hide();
+            $("#" + $(this).val()).show();
+        });
+    });
+</script>
+
+
+</body>
+</html>
