@@ -26,23 +26,15 @@ class RegistrationForm(FlaskForm):
     username = StringField('Логин', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
-    submit = SubmitField('Войти')
+    submit = SubmitField('Зарегистрироваться')
+
+
+class InputForm(FlaskForm):
+    code = StringField('Введите код', validators=[DataRequired()])
+    submit = SubmitField('Перейти')
 
 
 @app.route('/')
-@app.route('/index')
-def index():
-    param = {}
-    param['username'] = "Ученик Яндекс.Лицея"
-    param['title'] = 'Домашняя страница'
-    return render_template('index.html', **param)
-
-
-@app.route('/quest')
-def quest():
-    return render_template('quest.html')
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -60,9 +52,7 @@ def registration():
     form = RegistrationForm()
     if form.validate_on_submit():
         users = session.query(User)
-        if not (users.filter(User.email == form.email) and
-                users.filter(User.login == form.username) and
-                users.filter(User.password == form.password)):
+        if not (users.filter(User.email == form.email or User.login == form.username)):
             user = User()
             user.login = form.username
             user.email = form.email
@@ -72,6 +62,16 @@ def registration():
 
         return redirect('/index')
     return render_template('registration.html', title='Регистрация', form=form)
+
+
+@app.route('/code_input', methods=['GET', 'POST'])
+def code_input():
+    form = InputForm()
+    return render_template('code_input.html', title='Ввод кода', form=form)
+
+@app.route('/quest')
+def quest():
+    return render_template('quest.html')
 
 
 if __name__ == '__main__':

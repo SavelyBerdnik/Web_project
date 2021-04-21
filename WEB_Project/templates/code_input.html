@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post" novalidate>
+	<div class="btn-group" role="group" aria-label="Basic outlined example">
+		<button type="button" class="btn btn-outline-primary"><h3>Авторизация</h3></button>
+		<button type="button" class="btn btn-outline-primary"><h3>Регистрация</h3></button>
+		<button type="button" class="btn btn-primary"><h3>Ввод кода</h3></button>
+	</div>
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.code.label }}<br>
+		{{ form.code(class="form-control") }}<br>
+		{% for error in form.code.errors %}
+	<div class="alert alert-danger" role="alert">
+		{{ error }}
+	</div>
+	{% endfor %}
+	</p>
+	<p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}
