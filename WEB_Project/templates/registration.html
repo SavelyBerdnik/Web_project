@@ -1,12 +1,12 @@
-{% extends "base.html" %}
+{% extends "base_form.html" %}
 
 {% block content %}
 <form action="" method="post" novalidate>
 	
 	<div class="btn-group" role="group" aria-label="Basic outlined example">
-		<button type="button" class="btn btn-outline-primary"><h3>Авторизация</h3></button>
+		<button type="button" onclick="return location.href ='/login'" class="btn btn-outline-primary"><h3>Авторизация</h3></button>
 		<button type="button" class="btn btn-primary"><h3>Регистрация</h3></button>
-		<button type="button" class="btn btn-outline-primary"><h3>Ввод кода</h3></button>
+		<button type="button" onclick="return location.href ='/code_input'" class="btn btn-outline-primary"><h3>Ввод кода</h3></button>
 	</div>
 	{{ form.hidden_tag() }}
 	<p>

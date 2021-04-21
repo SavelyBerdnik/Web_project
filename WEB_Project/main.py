@@ -43,7 +43,7 @@ def login():
         if users.filter(User.email == form.email and
                         User.login == form.username and
                         User.password == form.password):
-            return redirect('/index')
+            return redirect('/create')
     return render_template('login.html', title='Авторизация', form=form)
 
 
@@ -60,18 +60,26 @@ def registration():
             session.add(user)
             session.commit()
 
-        return redirect('/index')
+        return redirect('/create')
     return render_template('registration.html', title='Регистрация', form=form)
 
 
 @app.route('/code_input', methods=['GET', 'POST'])
 def code_input():
     form = InputForm()
+    if form.validate_on_submit():
+        return redirect('/create')
     return render_template('code_input.html', title='Ввод кода', form=form)
+
 
 @app.route('/quest')
 def quest():
     return render_template('quest.html')
+
+
+@app.route('/create')
+def create():
+    return render_template('create.html')
 
 
 if __name__ == '__main__':
