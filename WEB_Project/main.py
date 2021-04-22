@@ -39,10 +39,9 @@ class InputForm(FlaskForm):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        users = session.query(User)
-        if users.filter(User.email == form.email and
-                        User.login == form.username and
-                        User.password == form.password):
+        if session.query(User).filter(User.email == form.email and
+                                      User.login == form.username and
+                                      User.password == form.password):
             return redirect('/create')
     return render_template('login.html', title='Авторизация', form=form)
 
@@ -51,16 +50,15 @@ def login():
 def registration():
     form = RegistrationForm()
     if form.validate_on_submit():
-        users = session.query(User)
-        if not (users.filter(User.email == form.email or User.login == form.username)):
+        if len(list(session.query(User).filter(User.email == form.email or User.login == form.username))) == 0:
             user = User()
             user.login = form.username
             user.email = form.email
             user.password = form.password
             session.add(user)
             session.commit()
+            return redirect('/create')
 
-        return redirect('/create')
     return render_template('registration.html', title='Регистрация', form=form)
 
 

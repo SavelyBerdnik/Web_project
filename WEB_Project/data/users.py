@@ -13,9 +13,7 @@ class User(SqlAlchemyBase):
     email = sqlalchemy.Column(sqlalchemy.String,
                               index=True, unique=True, nullable=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    created_date = sqlalchemy.Column(sqlalchemy.DateTime,
-                                     default=datetime.datetime.now)
-    questionnaires = orm.relation("News", back_populates='user')
+    questionnaires = orm.relation("Questionnaires", back_populates='user')
 
     def __repr__(self):
         return User.id
