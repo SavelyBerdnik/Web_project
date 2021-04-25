@@ -17,16 +17,24 @@
 	<div class="container">
 		<div class="col-md-8 col-sm-8 mx-auto text-center mb-5">
 			<h1>InPresent</h1>
-			
-			<p>
-			{% for item in quetions %}
-				<input type="checkbox" class = "form-check-input" name="option1" value="a1">{{ item }}<Br>
-			{% endfor %}
-			</p>
+			<lable>Вопрос</lable><br>
+			<input type="checkbox" class = "form-check-input" name="option1" value="a1">Первый<Br>
+			<input type="checkbox" class = "form-check-input" name="option1" value="a1">Второй<Br>
+			<input type="checkbox" class = "form-check-input" name="option1" value="a1">Третий<Br>
+			<input type="checkbox" class = "form-check-input" name="option1" value="a1">Четвёртый<Br>
 			<button type="button" class="btn btn-outline-dark">Отправить</button>
 		</div>
 	</div>
 
-
+<!-- <p>
+			<lable>{{question}}</lable><br>
+			{% if type == "open_form" %}
+				<textarea></textarea><br>
+			{% else %}
+				{% for item in quetions %}
+					<input type="checkbox" class = "form-check-input" name="option1" value="a1">{{ item }}<Br>
+				{% endfor %}
+			{% endif %}
+			</p> -->
 </body>
 </html>
